@@ -43,26 +43,7 @@ $hotels = [
 
 ];
 
-//var_dump($hotels);
-
-
-// foreach ($hotels as $hotel) {
-//     echo $hotel['name'];
-//     echo '<br>';
-//     echo $hotel['description'];
-//     echo '<br>';
-//     if ($hotel['parking']) {
-//         echo 'Parcheggio: sì';
-//     } else {
-//         echo 'Parcheggio: no';
-//     }
-//     echo '<br>';
-//     echo $hotel['vote'];
-//     echo '<br>';
-//     echo 'Distanza dal centro: ' . $hotel['distance_to_center'];
-//     echo '<br>';
-// }
-
+var_dump($_GET);
 
 ?>
 
@@ -78,32 +59,66 @@ $hotels = [
     <!-- Bootstrap CSS v5.2.1 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: lightcoral;
+        }
+
+        .row {
+            height: max-content;
+            padding-top: 3rem;
+            justify-content: center;
+        }
+
         .card {
-            height: 200px;
+            aspect-ratio: 5/2;
+            text-align: center;
         }
     </style>
 </head>
 
 <body>
     <div class="container">
+        <form action="index.php" method="GET">
+            <select name="isParking">
+                <option value="" selected disabled>All</option>
+                <option value="with_parking">Con parcheggio</option>
+                <option value="without_parking">Senza parcheggio</option>
+            </select>
+        </form>
+
         <div class="row row-cols-2 g-4">
             <?php foreach ($hotels as $hotel) : ?>
                 <div class="col">
                     <div class="card p-3">
                         <div class="name">
-                            <?php echo $hotel['name'] ?>
+                            <h2>
+                                <?php echo $hotel['name'] ?>
+                            </h2>
                         </div>
                         <div class="description">
                             <?php echo $hotel['description'] ?>
                         </div>
                         <div class="parking">
-                            <?php echo $hotel['parking'] ?>
+                            <?php if ($hotel['parking']) {
+                                echo 'Parcheggio: Disponibile';
+                            } else {
+                                echo 'Parcheggio: Non disponibile';
+                            } ?>
                         </div>
                         <div class="vote">
+                            Voto:
                             <?php echo $hotel['vote'] ?>
                         </div>
                         <div class="distance">
+                            Distanza dal centro:
                             <?php echo $hotel['distance_to_center'] ?>
+                            km
                         </div>
                     </div>
                 </div>
