@@ -43,7 +43,10 @@ $hotels = [
 
 ];
 
-var_dump($_GET);
+// var_dump($_GET['isParking']);
+if (isset($_GET['isParking'])) {
+    echo $_GET['isParking'];
+}
 
 ?>
 
@@ -90,6 +93,7 @@ var_dump($_GET);
                 <option value="with_parking">Con parcheggio</option>
                 <option value="without_parking">Senza parcheggio</option>
             </select>
+            <button type="submit">Invia</button>
         </form>
 
         <div class="row row-cols-2 g-4">
